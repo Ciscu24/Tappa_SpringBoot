@@ -1,6 +1,7 @@
 package com.proyectociscu.tappa_restful.controllers;
 
 import com.proyectociscu.tappa_restful.exceptions.RecordNotFoundException;
+import com.proyectociscu.tappa_restful.model.CallShipping;
 import com.proyectociscu.tappa_restful.model.User;
 import com.proyectociscu.tappa_restful.services.UserService;
 import java.util.List;
@@ -61,7 +62,9 @@ public class UserServiceController {
     }
     
     @PutMapping("/edit/{id}")
-    public ResponseEntity<User> updateCallAndShipping(@PathVariable("id") Long id, @Valid @RequestBody int shipping, @Valid @RequestBody int call) throws RecordNotFoundException {
+    public ResponseEntity<User> updateCallAndShipping(@PathVariable("id") Long id, @RequestBody CallShipping callshipping) throws RecordNotFoundException {
+        int call = callshipping.getCall();
+        int shipping = callshipping.getShipping();
         User entity = service.updateCallAndShipping(id, shipping, call);
 
         return new ResponseEntity<User>(entity, new HttpHeaders(), HttpStatus.OK);
