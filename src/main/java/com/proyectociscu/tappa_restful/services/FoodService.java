@@ -48,6 +48,7 @@ public class FoodService {
                 Food newEntity = food.get();
                 newEntity.setName(entity.getName());
                 newEntity.setPrice(entity.getPrice());
+                newEntity.setImage(entity.getImage());
                 newEntity.setOrders(entity.getOrders());
                 
                 newEntity = repository.save(newEntity);

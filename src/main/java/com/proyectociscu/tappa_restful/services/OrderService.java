@@ -47,6 +47,7 @@ public class OrderService {
                 Order newEntity = order.get();
                 newEntity.setStreet(entity.getStreet());
                 newEntity.setDate(entity.getDate());
+                newEntity.setImage(entity.getImage());
                 newEntity.setUsers(entity.getUsers());
                 newEntity.setAddedFood(entity.getAddedFood());
                 

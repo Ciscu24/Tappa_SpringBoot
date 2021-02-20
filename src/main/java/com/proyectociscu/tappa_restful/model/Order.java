@@ -33,6 +33,9 @@ public class Order {
     @Column(name="fecha")
     private Date date;
     
+    @Column(name="image")
+    private String image;
+    
     @JsonIgnoreProperties(value = {"orders"}, allowSetters = true)
     @ManyToMany(cascade = {CascadeType.MERGE})
     @JoinTable(name = "usuario_pedido", joinColumns = @JoinColumn(name = "id_pedido"), inverseJoinColumns = @JoinColumn(name = "id_usuario"))
@@ -65,6 +68,14 @@ public class Order {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
     
     public List<User> getUsers() {

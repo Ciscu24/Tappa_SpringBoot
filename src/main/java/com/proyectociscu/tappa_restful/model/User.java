@@ -43,6 +43,9 @@ public class User {
     @Column(name="contrasena")
     private String password;
     
+    @Column(name="imagen")
+    private String image;
+    
     @JsonIgnoreProperties(value = {"users"}, allowSetters = true)
     @ManyToMany(mappedBy = "users",cascade = {CascadeType.MERGE})
     private List<Order> orders;
@@ -103,6 +106,14 @@ public class User {
         this.password = password;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+    
     public List<Order> getOrders() {
         return orders;
     }

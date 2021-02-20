@@ -51,6 +51,7 @@ public class UserService {
                 newEntity.setCall(entity.getCall());
                 newEntity.setEmail(entity.getEmail());
                 newEntity.setPassword(entity.getPassword());
+                newEntity.setImage(entity.getImage());
                 newEntity.setOrders(entity.getOrders());
                 
                 newEntity = repository.save(newEntity);
@@ -72,6 +73,25 @@ public class UserService {
                 User newEntity = user.get();
                 newEntity.setShipping(shipping);
                 newEntity.setCall(call);
+                
+                newEntity = repository.save(newEntity);
+                
+                return newEntity;
+            }else{
+                throw  new RecordNotFoundException("User not found", id);
+            }
+        }else{
+            throw new RecordNotFoundException("No id of user given", 0l);
+        }
+    }
+    
+    public User updateImage(Long id, String image) throws RecordNotFoundException{
+        if(id!=null){ 
+            Optional<User> user = repository.findById(id);
+            
+            if(user.isPresent()){
+                User newEntity = user.get();
+                newEntity.setImage(image);
                 
                 newEntity = repository.save(newEntity);
                 

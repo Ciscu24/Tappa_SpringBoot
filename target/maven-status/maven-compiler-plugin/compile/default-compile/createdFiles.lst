@@ -1,3 +1,4 @@
+com\proyectociscu\tappa_restful\model\Image.class
 com\proyectociscu\tappa_restful\services\OrderService.class
 com\proyectociscu\tappa_restful\services\UserService.class
 com\proyectociscu\tappa_restful\repositories\FoodRepository.class

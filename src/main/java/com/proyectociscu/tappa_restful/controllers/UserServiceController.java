@@ -2,6 +2,7 @@ package com.proyectociscu.tappa_restful.controllers;
 
 import com.proyectociscu.tappa_restful.exceptions.RecordNotFoundException;
 import com.proyectociscu.tappa_restful.model.CallShipping;
+import com.proyectociscu.tappa_restful.model.Image;
 import com.proyectociscu.tappa_restful.model.User;
 import com.proyectociscu.tappa_restful.services.UserService;
 import java.util.List;
@@ -66,6 +67,13 @@ public class UserServiceController {
         int call = callshipping.getCall();
         int shipping = callshipping.getShipping();
         User entity = service.updateCallAndShipping(id, shipping, call);
+
+        return new ResponseEntity<User>(entity, new HttpHeaders(), HttpStatus.OK);
+    }
+    
+    @PutMapping("/editimage/{id}")
+    public ResponseEntity<User> updateImage(@PathVariable("id") Long id, @RequestBody Image image) throws RecordNotFoundException {
+        User entity = service.updateImage(id, image.getImage());
 
         return new ResponseEntity<User>(entity, new HttpHeaders(), HttpStatus.OK);
     }

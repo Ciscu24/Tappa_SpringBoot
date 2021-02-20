@@ -27,6 +27,9 @@ public class Food {
     @Column(name="precio")
     private double price;
     
+    @Column(name="image")
+    private String image;
+    
     @JsonIgnoreProperties(value = {"addedFood"}, allowSetters = true)
     @ManyToMany(mappedBy = "addedFood", cascade = {CascadeType.MERGE})
     private List<Order> orders;
@@ -53,6 +56,14 @@ public class Food {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public List<Order> getOrders() {
