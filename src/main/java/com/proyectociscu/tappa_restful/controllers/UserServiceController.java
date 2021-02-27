@@ -3,6 +3,7 @@ package com.proyectociscu.tappa_restful.controllers;
 import com.proyectociscu.tappa_restful.exceptions.RecordNotFoundException;
 import com.proyectociscu.tappa_restful.model.CallShipping;
 import com.proyectociscu.tappa_restful.model.Image;
+import com.proyectociscu.tappa_restful.model.Order;
 import com.proyectociscu.tappa_restful.model.User;
 import com.proyectociscu.tappa_restful.services.UserService;
 import java.util.List;
@@ -43,12 +44,19 @@ public class UserServiceController {
         return new ResponseEntity<User>(entity, new HttpHeaders(), HttpStatus.OK);
     }
 
-    /*@GetMapping("/search/{email}")
-    public ResponseEntity<User> getUserByEmail(@PathVariable("email") String email) throws RecordNotFoundException {
-        User entity = service.getUserByEmail(email);
+    @GetMapping("/search/{name}")
+    public ResponseEntity<List<User>> getUsersByName(@PathVariable("name") String name) throws RecordNotFoundException {
+        List<User> list = service.getUsersByName(name);
 
-        return new ResponseEntity<User>(entity, new HttpHeaders(), HttpStatus.OK);
-    }*/
+        return new ResponseEntity<List<User>>(list, new HttpHeaders(), HttpStatus.OK);
+    }
+    
+    @GetMapping("/orders/{id}")
+    public ResponseEntity<List<Object>> getOrdersByUserId(@PathVariable("id") Long id) throws RecordNotFoundException {
+        List<Object> list = service.getOrdersByUserId(id);
+
+        return new ResponseEntity<List<Object>>(list, new HttpHeaders(), HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity<User> createUser(@Valid @RequestBody User myUser) {

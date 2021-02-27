@@ -1,6 +1,7 @@
 package com.proyectociscu.tappa_restful.services;
 
 import com.proyectociscu.tappa_restful.exceptions.RecordNotFoundException;
+import com.proyectociscu.tappa_restful.model.Order;
 import com.proyectociscu.tappa_restful.model.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,24 @@ public class UserService {
             return user.get();
         }else{
             throw new RecordNotFoundException("No user record exist for given id", id);
+        }
+    }
+    
+    public List<User> getUsersByName(String name){
+        List<User> userList = repository.getUsersByName(name);
+        if(userList.size() > 0){
+            return userList;
+        }else{
+            return new ArrayList<>();
+        }
+    }
+    
+    public List<Object> getOrdersByUserId(Long id){
+        List<Object> orderList = repository.getOrdersByUserId(id);
+        if(orderList.size() > 0){
+            return orderList;
+        }else{
+            return new ArrayList<>();
         }
     }
     

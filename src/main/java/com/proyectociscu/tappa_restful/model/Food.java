@@ -9,9 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="comida")
@@ -33,6 +34,11 @@ public class Food {
     @JsonIgnoreProperties(value = {"addedFood"}, allowSetters = true)
     @ManyToMany(mappedBy = "addedFood", cascade = {CascadeType.MERGE})
     private List<Order> orders;
+    
+    @JsonIgnoreProperties(value = {"food"}, allowSetters = true)
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "id_extra")
+    private Extra extra;
 
     public Long getId() {
         return id;
@@ -80,6 +86,21 @@ public class Food {
             if(!addedFood.contains(this)){
                 addedFood.add(this);
             }
+        }
+    }
+
+    public Extra getExtra() {
+        return extra;
+    }
+
+    public void setExtra(Extra extra) {
+        this.extra = extra;
+        List<Food> food = this.extra.getFood();
+        if(food == null){
+            food = new ArrayList<>();
+        }
+        if(!food.contains(this)){
+            food.add(this);
         }
     }
     
